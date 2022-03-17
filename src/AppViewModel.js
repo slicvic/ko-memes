@@ -8,6 +8,7 @@ export class AppViewModel {
 
     filteredMemes = ko.computed(() => {
         const term = this.searchTerm()
+        this.currentPage(1)
         return term
             ? this.#allMemes().filter(({ name }) =>
                   name.toLowerCase().includes(term.toLowerCase())

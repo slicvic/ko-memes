@@ -20,14 +20,17 @@
             </header>
             <loading-overlay params="show: isLoading"></loading-overlay>
             <search-bar params="searchTerm: searchTerm"></search-bar>
-            <meme-gallery params="memes: memes"></meme-gallery>
+            <meme-gallery params="memes: paginatedMemes"></meme-gallery>
             <footer class="app-footer">
                 <button
                     type="button"
                     class="btn btn-primary btn-lg load-more-btn"
-                    data-bind="click: loadMore"
+                    data-bind="click: loadMore, visible: currentPage() < pageCount()"
                 >
                     Load More
+                    <span
+                        data-bind="text: `${currentPage()}/${pageCount()}`"
+                    ></span>
                 </button>
             </footer>
         </div>

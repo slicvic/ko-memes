@@ -1,5 +1,9 @@
 export class AppViewModel {
-    allMemes = []
+    #allMemes = []
+    #perPage = 5
+    currentPage = ko.observable(1)
+    pageCount = 0
+
     memes = ko.observableArray()
     isLoading = ko.observable(false)
     searchTerm = ko.observable('')
@@ -12,15 +16,24 @@ export class AppViewModel {
         })
     }
 
+    loadMore() {
+        if (this.currentPage() < this.pageCount) {
+            this.currentPage(this.currentPage() + 1)
+            this.memes(
+                this.#allMemes.slice(0, this.currentPage() * this.#perPage)
+            )
+        }
+    }
+
     #filterMemes(by) {
         if (by && typeof by === 'string') {
             this.memes(
-                this.allMemes.filter(({ name }) =>
+                this.#allMemes.filter(({ name }) =>
                     name.toLowerCase().includes(by.toLowerCase())
                 )
             )
         } else {
-            this.memes(this.allMemes)
+            this.memes(this.#allMemes.slice(0, this.#perPage))
         }
     }
 
@@ -29,13 +42,16 @@ export class AppViewModel {
         fetch('https://api.imgflip.com/get_memes')
             .then((response) => response.json())
             .then((json) => {
-                this.allMemes = json.data.memes.slice(0, 50)
-                this.memes(this.allMemes)
+                this.#allMemes = json.data.memes
+                this.pageCount = Math.ceil(
+                    this.#allMemes.length / this.#perPage
+                )
+                this.memes(this.#allMemes.slice(0, this.#perPage))
             })
             .finally(() => {
                 setTimeout(() => {
                     this.isLoading(false)
-                }, 2000)
+                }, 1000)
             })
     }
 }

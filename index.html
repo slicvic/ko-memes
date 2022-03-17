@@ -21,6 +21,15 @@
             <loading-overlay params="show: isLoading"></loading-overlay>
             <search-bar params="searchTerm: searchTerm"></search-bar>
             <meme-gallery params="memes: memes"></meme-gallery>
+            <footer class="app-footer">
+                <button
+                    type="button"
+                    class="btn btn-primary btn-lg load-more-btn"
+                    data-bind="click: loadMore"
+                >
+                    Load More
+                </button>
+            </footer>
         </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
         <script

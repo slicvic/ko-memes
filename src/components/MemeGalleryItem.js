@@ -8,6 +8,7 @@ ko.components.register('meme-gallery-item', {
         <div class="meme-gallery-item">
             <img class="meme-img" data-bind="attr: {src: url}">
             <p class="meme-name" data-bind="text: name"></p>
+            <like-rating></like-rating>
         </div>
     `,
 })

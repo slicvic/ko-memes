@@ -4,7 +4,7 @@ ko.components.register('search-bar', {
     },
     template: `
         <div class="search-bar">
-            <input type="search" placeholder="Search memes" data-bind="textInput: searchTerm">
+            <input type="search" class="form-control" placeholder="Search memes" data-bind="textInput: searchTerm">
         </div>
     `,
 })

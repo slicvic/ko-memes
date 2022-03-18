@@ -11,6 +11,7 @@ ko.components.register('like-rating', {
         <div class="like-rating">
             <button 
                 type="button" 
+                title="Like"
                 class="btn btn-link like-btn"
                 data-bind="
                     enable: rating() === undefined || rating() === 'disliked', 
@@ -19,6 +20,7 @@ ko.components.register('like-rating', {
             </button>
             <button 
                 type="button"
+                title="Dislike"
                 class="btn btn-link dislike-btn"
                 data-bind="
                     enable: rating() === undefined || rating() === 'liked', 
